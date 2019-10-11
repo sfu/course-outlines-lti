@@ -1,0 +1,134 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  font-size: 1rem;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: rgb(45, 59, 69);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul[class], ol[class] {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  margin-bottom: 0;
+  font-size: 1.5em;
+}
+
+h2 {
+  margin: 0;
+  font-size: 2.5em;
+  line-height: 1em;
+}
+
+h3 {
+  font-size: 1.5em;
+  font-weight: bold;
+  border-bottom: 1px dotted #ccc;
+  width: 95%;
+  margin-bottom: 0;
+}
+
+h3.supplemental {
+  font-size: 1.2em;
+}
+
+h4 {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+
+h1, h4 {
+  color: #6b6b6b;
+}
+
+.schedule {
+  display: flex;
+}
+
+.scheduleBlock {
+  flex-grow: 1;
+}
+
+.scheduleList {
+  margin-top: 0.5em !important;
+}
+
+p.isbn {
+  margin-top: 0;
+}
+
+div.additionalNotes {
+  margin-top: 100px;
+}
+
+div.disclaimer {
+  margin-top: 30px;
+}
+
+div.disclaimer * {
+  font-style: italic;
+}
+
+ul.outlineSwitcher {
+  display: flex;
+}
+
+.outlineSwitcher li {
+  padding-right: 20px;
+}
+
+.instructorProfile {
+  margin-left: 15px;
+}
+
+.instructorList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-top: 2.5em;
+}
+
+.instructor {
+  flex-grow: 1;
+  display: flex;
+}
+
+.instructor h4 {
+  margin-top: 0;
+}
+
+.instructorDetails {
+  margin-left: 1em;
+}
+
+.gradeItemTable {
+  width: 50%;
+  border-collapse: collapse;
+  margin-top: 1em;
+}
+
+.gradeItemTable tr:not(:last-child) {
+  border-bottom: 1px #ccc solid;
+}
+
+.gradeItemWeight {
+  text-align: center;
+}

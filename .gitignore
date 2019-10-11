@@ -1,0 +1,8 @@
+.cache
+.static
+node_modules
+src/shared/views
+src/**/node_modules
+docker-compose.local.yml
+public/client.*
+.arc-env

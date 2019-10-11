@@ -1,0 +1,17 @@
+{
+  "extends": ["unobtrusive", "plugin:react/recommended"],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "env": {
+    "es6": true,
+    "node": true,
+    "jest": true,
+    "browser": true
+  },
+  "rules": {
+    "no-var": "error",
+    "prefer-const": "warn"
+  }
+}

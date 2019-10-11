@@ -1,0 +1,13 @@
+version: '3'
+services:
+  web: &WEB
+    build: .
+    command: arc sandbox
+    volumes:
+      - .:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
+    ports:
+      - '3333:3333'
+
+volumes:
+  node_modules: {}
