@@ -26,9 +26,11 @@ const handler = async req => {
 
     // launch is valid, fetch the course outline(s) for the course(s)
     const courseId = req.body.custom_course_offering_sis_id;
+    const canvasUrl = req.body.custom_canvas_url_base;
+
     const courses = courseId ? courseId.split(':') : [];
     const outlines = await getAllOutlines(courses);
-    const profiles = await getCanvasProfilesForAllCourses(outlines);
+    const profiles = await getCanvasProfilesForAllCourses(canvasUrl, outlines);
 
     outlines.forEach((outline, i) => {
       // replace the instructor object with the corresponding object from profiles
