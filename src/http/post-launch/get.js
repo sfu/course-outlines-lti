@@ -1,8 +1,6 @@
 // https://www.tomas-dvorak.cz/posts/nodejs-request-without-dependencies/
 
 module.exports = function(url, options = {}) {
-  // allow self-signed certificates in non-production environments
-  options.rejectUnauthorized = process.env.NODE_ENV === 'production';
   // return new pending promise
   return new Promise((resolve, reject) => {
     // select http or https module, depending on reqested url
