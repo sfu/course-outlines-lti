@@ -3,7 +3,7 @@ const LTI = require('ims-lti');
 const util = require('util');
 const { getAllOutlines } = require('./outlines');
 const { getCanvasProfilesForAllCourses } = require('./canvas');
-
+const headerMunger = require('@architect/shared/headerMunger');
 const render = require('@architect/shared/views/index.js');
 
 const handler = async req => {
