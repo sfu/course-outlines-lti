@@ -55,7 +55,7 @@ const handler = async req => {
     console.log(error);
     return {
       headers: { 'content-type': 'text/html; charset=utf8' },
-      body: `<p>An error occured</p><pre>${error}</pre>`,
+      body: `<p>An error occured</p>`,
     };
   }
 };
