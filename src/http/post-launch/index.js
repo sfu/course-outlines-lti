@@ -58,4 +58,4 @@ const handler = async req => {
   }
 };
 
-exports.handler = arc.http.async(handler);
+exports.handler = arc.http.async(headerMunger, handler);
