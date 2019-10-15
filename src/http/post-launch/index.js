@@ -10,9 +10,11 @@ const handler = async req => {
   try {
     const provider = new LTI.Provider('courseoutlines', 'courseoutlines');
     const validateRequest = util.promisify(provider.valid_request);
+
     // patch the req object to be what the ims-lti library expects
     const protocol = req.headers['x-forwarded-proto'] || 'http';
-    req.url = `${protocol}://${req.headers.host}${req.path}`;
+    req.url = `${protocol}://${req.headers.host}${req.requestContext.path ||
+      req.path}`;
     req.protocol = protocol;
 
     const isValid = await validateRequest(req);
