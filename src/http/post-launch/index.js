@@ -25,11 +25,7 @@ const handler = async req => {
 
     const isValid = await validateRequest(req);
     if (!isValid) {
-      return {
-        headers: { 'content-type': 'text/html; charset=utf8' },
-        status: 403,
-        body: `<p>Unauthorized Launch</p>`,
-      };
+      throw new Error('unauthorized launch');
     }
 
     // launch is valid, fetch the course outline(s) for the course(s)
@@ -58,6 +54,7 @@ const handler = async req => {
       body: render({ outlines }),
     };
   } catch (error) {
+    console.log(error, req, process.env);
     const returnBody = {
       headers: { 'content-type': 'text/html; charset=utf8' },
       body: `<p>An error occured</p>`,
@@ -70,7 +67,34 @@ const handler = async req => {
       return {
         status: 500,
         headers: { 'content-type': 'text/html; charset=utf8' },
-        body: `<p>An error occured: ${e}</p>`,
+        body: `
+<html>
+  <head>
+    <style>
+      body {
+
+        scroll-behavior: smooth;
+        text-rendering: optimizeSpeed;
+        line-height: 1.5;
+        font-size: 1rem;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        color: rgb(45, 59, 69);
+      }
+      
+      h1 {
+        margin-bottom: 0;
+        font-size: 1.5em;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Sorry, an error occurred</h1>
+    <p>An error occurred while trying to display the SFU Course Outline for this course. This error has been reported to the SFU Canvas administrators.</p>
+    <p>Error reference: ${e}</p>
+  </body>
+</html>`,
       };
     } else {
       return returnBody;
