@@ -8,7 +8,8 @@ const render = require('@architect/shared/views/index.js');
 
 const handler = async req => {
   try {
-    const provider = new LTI.Provider('courseoutlines', 'courseoutlines');
+    const { LTI_CLIENT_ID, LTI_SECRET } = process.env;
+    const provider = new LTI.Provider(LTI_CLIENT_ID, LTI_SECRET);
     const validateRequest = util.promisify(provider.valid_request);
 
     // patch the req object to be what the ims-lti library expects
