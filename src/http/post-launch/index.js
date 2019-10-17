@@ -1,10 +1,15 @@
 const arc = require('@architect/functions');
 const LTI = require('ims-lti');
+const Sentry = require('@sentry/node');
 const util = require('util');
 const { getAllOutlines } = require('./outlines');
 const { getCanvasProfilesForAllCourses } = require('./canvas');
 const headerMunger = require('@architect/shared/headerMunger');
 const render = require('@architect/shared/views/index.js');
+
+if (process.env.SENTRY_DSN) {
+  Sentry.init({ dsn: process.env.SENTRY_DSN });
+}
 
 const handler = async req => {
   try {
@@ -53,11 +58,23 @@ const handler = async req => {
       body: render({ outlines }),
     };
   } catch (error) {
-    console.log(error);
-    return {
+    const returnBody = {
       headers: { 'content-type': 'text/html; charset=utf8' },
       body: `<p>An error occured</p>`,
     };
+    if (process.env.SENTRY_DSN) {
+      Sentry.configureScope(scope => scope.setExtra('req.body', req.body));
+      const e = Sentry.captureException(error);
+      await Sentry.flush(2000);
+
+      return {
+        status: 500,
+        headers: { 'content-type': 'text/html; charset=utf8' },
+        body: `<p>An error occured: ${e}</p>`,
+      };
+    } else {
+      return returnBody;
+    }
   }
 };
 
