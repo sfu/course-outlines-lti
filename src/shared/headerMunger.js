@@ -15,4 +15,5 @@ module.exports = req => {
     }
   });
   req.headers = normalizedHeaders;
+  return req;
 };
