@@ -17,14 +17,14 @@ const Instructor = ({ instructor, canvas }) => (
     <div className="instructorDetails">
       <h4>{instructor.name}</h4>
       <ul className="instructorDetailList">
-        {canvas && (
+        {canvas && instructor.canvas ? (
           <li>
             <a href={`${canvas.courseUrl}/users/${instructor.canvas.id}`}>
               Canvas Profile
             </a>
           </li>
-        )}
-        {canvas && instructor.canvas.message_user_path ? (
+        ) : null}
+        {canvas && instructor.canvas && instructor.canvas.message_user_path ? (
           <li>
             <a
               href={`${canvas.canvasUrl}/${instructor.canvas.message_user_path}`}
