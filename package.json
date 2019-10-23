@@ -29,7 +29,9 @@
   },
   "scripts": {
     "clean": "rm -rf .static src/shared/views public/*",
-    "build": "parcel build src/client/index.html --public-url / --out-dir .static",
-    "bundle": "NODE_ENV=production npm run clean && npm run build && mkdir src/shared/views && mv .static/index.html src/shared/views/index.html && rollup -c --f cjs && mv .static/*.{js*,css*} public"
+    "build": "parcel build src/client/index.html --public-url /$ARC_ENV --out-dir .static",
+    "bundle": ": ${ARC_ENV?'Need to set ARC_ENV'} && NODE_ENV=production npm run clean && npm run build && mkdir src/shared/views && mv .static/index.html src/shared/views/index.html && rollup -c --f cjs && mv .static/*.{js*,css*} public",
+    "deploy": "ARC_ENV=${ARC_ENV:-staging} npm run bundle && arc deploy $ARC_ENV",
+    "deploy:prod": "ARC_ENV=production npm run deploy"
   }
 }
