@@ -7,6 +7,29 @@ const { getCanvasProfilesForAllCourses } = require('./canvas');
 const headerMunger = require('@architect/shared/headerMunger');
 const render = require('@architect/shared/views/index.js');
 
+const HTML_HEAD = `
+<html>
+  <head>
+    <style>
+      body {
+
+        scroll-behavior: smooth;
+        text-rendering: optimizeSpeed;
+        line-height: 1.5;
+        font-size: 1rem;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        color: rgb(45, 59, 69);
+      }
+      
+      h1 {
+        margin-bottom: 0;
+        font-size: 1.5em;
+      }
+    </style>
+  </head>
+`;
 if (process.env.SENTRY_DSN) {
   Sentry.init({ dsn: process.env.SENTRY_DSN });
 }
@@ -68,27 +91,7 @@ const handler = async req => {
         status: 500,
         headers: { 'content-type': 'text/html; charset=utf8' },
         body: `
-<html>
-  <head>
-    <style>
-      body {
-
-        scroll-behavior: smooth;
-        text-rendering: optimizeSpeed;
-        line-height: 1.5;
-        font-size: 1rem;
-        -webkit-text-size-adjust: 100%;
-        -ms-text-size-adjust: 100%;
-        font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        color: rgb(45, 59, 69);
-      }
-      
-      h1 {
-        margin-bottom: 0;
-        font-size: 1.5em;
-      }
-    </style>
-  </head>
+${HTML_HEAD}
   <body>
     <h1>Sorry, an error occurred</h1>
     <p>An error occurred while trying to display the SFU Course Outline for this course. This error has been reported to the SFU Canvas administrators.</p>
