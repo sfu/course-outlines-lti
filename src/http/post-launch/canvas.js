@@ -1,6 +1,6 @@
 const get = require('./get');
 
-const { CANVAS_API_KEY } = process.env;
+const { CANVAS_API_KEY, ART_TOKEN, REST_URL } = process.env;
 const CANVAS_AUTH_HEADER = { authorization: `Bearer ${CANVAS_API_KEY}` };
 
 const getInstructorProfile = async (canvasUrl, instructor, outline) => {
@@ -9,7 +9,14 @@ const getInstructorProfile = async (canvasUrl, instructor, outline) => {
       return instructor;
     }
 
-    const id = instructor.email.split('@')[0];
+    let id = instructor.email.split('@')[0];
+
+    if (id.includes('_')) {
+      // email address is an alias, get the computing id
+      const bio = await get(`${REST_URL}?username=${id}&art=${ART_TOKEN}`);
+      id = bio.username;
+    }
+
     const url = `${canvasUrl}/api/v1/users/sis_login_id:${id}/profile`;
     const profile = await get(url, { headers: { ...CANVAS_AUTH_HEADER } });
     instructor.canvas = profile;
