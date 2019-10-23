@@ -30,6 +30,9 @@ const HTML_HEAD = `
     </style>
   </head>
 `;
+
+const VALID_CREDIT_SIS_REGEXP = /\d{4}-\w+-\d{3}\w?-\w\d{3,}/;
+
 if (process.env.SENTRY_DSN) {
   Sentry.init({ dsn: process.env.SENTRY_DSN });
 }
@@ -55,7 +58,9 @@ const handler = async req => {
     const courseId = req.body.custom_course_offering_sis_id;
     const canvasUrl = req.body.custom_canvas_url_base;
 
-    const courses = courseId ? courseId.split(':') : [];
+    const courses = courseId
+      ? courseId.split(':').filter(id => id.match(VALID_CREDIT_SIS_REGEXP))
+      : [];
     const outlines = await getAllOutlines(courses);
     const profiles = await getCanvasProfilesForAllCourses(canvasUrl, outlines);
 
