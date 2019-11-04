@@ -33,6 +33,9 @@ const getInstructorProfile = async (canvasUrl, instructor, outline) => {
 };
 
 const getCanvasProfilesForCourse = async (canvasUrl, outline) => {
+  if (!outline.hasOwnProperty('instructor')) {
+    return {};
+  }
   try {
     const promises = outline.instructor.map(i =>
       getInstructorProfile(canvasUrl, i, outline)
