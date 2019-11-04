@@ -7,9 +7,16 @@ module.exports = function(url, options = {}) {
     const lib = url.startsWith('https') ? require('https') : require('http');
     const request = lib.get(url, options, response => {
       // handle http errors
+
+      if (response.statusCode === 404) {
+        resolve({});
+      }
+
       if (response.statusCode < 200 || response.statusCode > 299) {
         reject(
-          new Error('Failed to load page, status code: ' + response.statusCode)
+          new Error(
+            `Failed to load page ${url}, status code ${response.statusCode}`
+          )
         );
       }
       // temporary data holder
