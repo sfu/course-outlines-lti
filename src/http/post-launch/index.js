@@ -39,14 +39,19 @@ if (process.env.SENTRY_DSN) {
 
 const handler = async req => {
   try {
-    const { LTI_CLIENT_ID, LTI_SECRET } = process.env;
+    const { LTI_CLIENT_ID, LTI_SECRET, NODE_ENV } = process.env;
     const provider = new LTI.Provider(LTI_CLIENT_ID, LTI_SECRET);
     const validateRequest = util.promisify(provider.valid_request);
 
     // patch the req object to be what the ims-lti library expects
     const protocol = req.headers['x-forwarded-proto'] || 'http';
-    req.url = `${protocol}://${req.headers.host}${req.requestContext.path ||
-      req.path}`;
+    req.url =
+      NODE_ENV === 'testing'
+        ? // sandbox
+          `${protocol}://${req.headers.host}${req.path}`
+        : // aws
+          `${protocol}://${req.headers.host}${req.requestContext.path ||
+            req.path}`; // aws
     req.protocol = protocol;
 
     const isValid = await validateRequest(req);
