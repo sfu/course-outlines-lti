@@ -32,7 +32,7 @@ const ExamSchedule = ({ data }) => {
         <br />
         {!s.startDate || !s.startTime || !s.endTime
           ? `Time and Date TBA`
-          : `${formatDate(Date.now(), 'EEEE, MMMM d, yyyy')}, ${
+          : `${formatDate(new Date(s.startDate), 'EEEE, MMMM d, yyyy')}, ${
               s.startTime
             } - ${s.endTime}`}
       </li>
