@@ -31,7 +31,7 @@ const HTML_HEAD = `
   </head>
 `;
 
-const VALID_CREDIT_SIS_REGEXP = /\d{4}-\w+-\d{3}\w?-\w\d{3,}/;
+const VALID_CREDIT_SIS_REGEXP = /\d{4}-\w+-\d{3}\w?-\w+\d+/;
 
 if (process.env.SENTRY_DSN) {
   Sentry.init({ dsn: process.env.SENTRY_DSN });
