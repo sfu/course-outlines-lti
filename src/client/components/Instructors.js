@@ -19,7 +19,7 @@ const Instructor = ({ instructor, canvas }) => (
       <ul className="instructorDetailList">
         {canvas && instructor.canvas ? (
           <li>
-            <a href={`${canvas.courseUrl}/users/${instructor.canvas.id}`}>
+            <a target="_top" href={`${canvas.courseUrl}/users/${instructor.canvas.id}`}>
               Canvas Profile
             </a>
           </li>
@@ -27,7 +27,7 @@ const Instructor = ({ instructor, canvas }) => (
         {canvas && instructor.canvas && instructor.canvas.message_user_path ? (
           <li>
             <a
-              href={`${canvas.canvasUrl}/${instructor.canvas.message_user_path}`}
+              target="_top" href={`${canvas.canvasUrl}/${instructor.canvas.message_user_path}`}
             >
               Send Canvas Message
             </a>
