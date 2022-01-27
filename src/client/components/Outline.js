@@ -98,10 +98,10 @@ const Outline = ({ outline }) => (
         <div className="disclaimer">
           <p>
             Notice: This course outline was generated from data provided by the{' '}
-            <a href="http://www.sfu.ca/outlines.html">SFU Course Outlines</a>{' '}
+            <a target="_top" href="http://www.sfu.ca/outlines.html">SFU Course Outlines</a>{' '}
             system. In case of any discrepancy between this outline and the{' '}
             <a
-              href={`http://www.sfu.ca/outlines.html/${outline.info.outlinePath}`}
+              target="_top" href={`http://www.sfu.ca/outlines.html/${outline.info.outlinePath}`}
             >
               official outline
             </a>
@@ -109,7 +109,7 @@ const Outline = ({ outline }) => (
           </p>
           <p>
             Instructors: visit{' '}
-            <a href="http://outlines.sfu.ca">http://outlines.sfu.ca</a> to
+            <a target="_top" href="http://outlines.sfu.ca">http://outlines.sfu.ca</a> to
             update this course outline
           </p>
         </div>
@@ -133,7 +133,7 @@ const NoOutline = () => (
     </p>
     <p>
       Instructors: visit{' '}
-      <a href="http://outlines.sfu.ca">http://outlines.sfu.ca</a> to create or
+      <a target="_top" href="http://outlines.sfu.ca">http://outlines.sfu.ca</a> to create or
       update this course outline.
     </p>
   </>
